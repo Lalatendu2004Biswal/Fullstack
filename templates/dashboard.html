@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Dashboard</title>
+    <style>
+        :root {
+            --primary-color: #2563eb;
+            --bg-color: #f8fafc;
+            --text-color: #1e293b;
+            --danger-color: #ef4444;
+        }
+
+        body {
+            font-family: 'Segoe UI', Arial, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        header {
+            background: var(--primary-color);
+            color: white;
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        main {
+            flex: 1;
+            max-width: 800px;
+            margin: 2rem auto;
+            padding: 2rem;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+            text-align: center;
+        }
+
+        .btn-logout {
+            background: var(--danger-color);
+            color: white;
+            padding: 0.5rem 1rem;
+            text-decoration: none;
+            border-radius: 5px;
+            font-size: 0.9rem;
+        }
+
+        .welcome-card {
+            border: 2px solid #e2e8f0;
+            padding: 2rem;
+            border-radius: 12px;
+            margin-top: 1rem;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>Dashboard</h1>
+        <a href="/logout" class="btn-logout">Logout</a>
+    </header>
+
+    <main>
+        <div class="welcome-card">
+            <h2>Welcome Back!</h2>
+            <p>You have successfully logged into the <strong>Speech Coach Analyzer</strong> portal.</p>
+            <hr>
+            <p>Your session is currently active.</p>
+            <p><a href="/index">Go to Project Grid</a></p>
+        </div>
+    </main>
+
+    <footer style="text-align: center; padding: 1rem; color: #64748b; font-size: 0.8rem;">
+        <p>&copy; 2026 Lalatendu Biswal | B.Tech AI & Data Science</p>
+    </footer>
+
+</body>
+</html>

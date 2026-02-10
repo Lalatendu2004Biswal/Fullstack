@@ -1,17 +1,92 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flask 3-Div Layout</title>
+    <style>
+        :root {
+            --primary-color: #2563eb;
+            --bg-color: #f8fafc;
+            --text-color: #1e293b;
+        }
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background-color: var(--bg-color);
+        }
+        .btn {
+            display: inline-block;
+            background: var(--primary-color);
+            color: white;
+            padding: 0.75rem 1.5rem;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: opacity 0.2s;
+            margin-top: 1rem;
+        }
+
+        .btn:hover {
+            opacity: 0.9;
+        }
+
+        /* The Grid Container */
+        .grid-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr; /* Two equal columns */
+            grid-template-rows: auto auto;    /* Two rows */
+            gap: 15px;                      /* Space between divs */
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .box {
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            text-align: center;
+            border: 2px solid #007bff;
+        }
+
+        /* This div stays in the 1st column, 2nd row (below Div 1) */
+        .bottom-left {
+            grid-column: 1; 
+            grid-row: 2;
+            background-color: #e7f3ff;
+        }
+    </style>
+</head>
 <body>
+<p><a href="/" class="btn">Home</a></p>
+    <div class="grid-container">
+        <div class="box">
+            <h3>Div 1</h3>
+            <p>Top Left</p>
+        </div>
+        
+        <div class="box">
+            <h3>Div 2</h3>
+            <p>Top Right</p>
+        </div>
 
-<h2>Text input fields</h2>
+        <div class="box bottom-left">
+            <h3>Div 3</h3>
+            <p>Directly below Div 1</p>
+            <a href="/register" class="btn">Register</a>
+        </div>
 
-<form>
-  <label>First name:</label><br>
-  <input type="text"><br>
-  <label>Last name:</label><br>
-  <input type="text">
-</form>
+        <div class="box bottom-right">
+            <h3>Div 4</h3>
+            <p>Directly below Div 2</p>
+            <button onclick="greet()">Click Me</button>
+        </div>
+    </div>
 
-
+    <script>
+        function greet() {
+            alert("Hello from the bottom-left div!");
+        }
+    </script>
 </body>
 </html>
-
