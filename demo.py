@@ -1,6 +1,8 @@
 from flask import Flask, render_template, redirect, url_for, request, session
 import pymysql
 from config import config
+from werkzeug.security import generate_password_hash, check_password_hash
+
 
 app = Flask(__name__)
 app.config.from_object(config)
@@ -16,6 +18,9 @@ def get_db_connection():
         port=app.config['MYSQL_PORT']
     )
 
+
+
+
 @app.route("/")
 def home():
     return render_template("start.html")
@@ -30,6 +35,8 @@ def register():
     if request.method == "POST":
         u = request.form["username"]
         p = request.form["password"]
+        
+        hashed_password = generate_password_hash(p)  # Hash the password before storing
 
         conn = get_db_connection()
         cur = conn.cursor()
@@ -43,7 +50,7 @@ def register():
         
         # Insert new user
         try:
-            cur.execute("INSERT INTO users (username, password) VALUES (%s, %s)", (u, p))
+            cur.execute("INSERT INTO users (username, password) VALUES (%s, %s)", (u, hashed_password))
             conn.commit()  # Must commit to save changes
             return redirect(url_for("login"))
         except Exception as e:
@@ -72,7 +79,7 @@ def login():
         conn.close()
 
         # Check if user exists and password matches
-        if user_record and user_record[1] == p:
+        if user_record and check_password_hash(user_record[1], p):
             session["user"] = u
             return redirect(url_for("dashboard"))
 
