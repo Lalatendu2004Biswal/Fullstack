@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>Registered Users</h2>
+<table class="table table-striped table-hover mt-3">
+    <thead class="table-dark">
+        <tr>
+            <th>ID</th>
+            <th>Username</th>
+            <th>Role</th>
+            <th>Orders</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for u in users %}
+        <tr>
+            <td>{{ u.id }}</td>
+            <td>{{ u.username }}</td>
+            <td><span class="badge {{ 'bg-danger' if u.role == 'admin' else 'bg-secondary' }}">{{ u.role }}</span></td>
+            <td>{{ u.order_count }}</td>
+            <td>
+                {% if u.id != current_user.id %}
+                <form action="{{ url_for('admin_delete_user', user_id=u.id) }}" method="POST" onsubmit="return confirm('Delete user and all their orders?');">
+                    <button class="btn btn-outline-danger btn-sm">Delete</button>
+                </form>
+                {% endif %}
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}
